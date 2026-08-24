@@ -1,0 +1,161 @@
+/* PIS design system tokens — source of truth lives in design-system/tokens/.
+   These must come before the Tailwind directives. */
+@import '../design-system/tokens/typography.css';
+@import '../design-system/tokens/colors.css';
+@import '../design-system/tokens/spacing.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: var(--surface-page);
+    color: var(--text-body);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--text-heading);
+  }
+
+  /* Brief: visible keyboard focus is part of the quality floor. */
+  :focus-visible {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 2px;
+  }
+
+  /* Respect reduced motion. Animation is a client requirement, but it is
+     always opt-out — this block disables every effect on the site. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
+
+@layer components {
+  /* Staggered entrance for grid children inside a revealed section.
+     Each tile follows the one before it by 70ms, up to eight — past that the
+     cascade reads as a delay rather than a flourish. */
+  @keyframes pis-stagger-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .pis-revealed [style*='grid-template-columns'] > * {
+    animation: pis-stagger-in 460ms var(--ease-standard) both;
+  }
+
+  .pis-revealed [style*='grid-template-columns'] > *:nth-child(1) { animation-delay: 40ms; }
+  .pis-revealed [style*='grid-template-columns'] > *:nth-child(2) { animation-delay: 110ms; }
+  .pis-revealed [style*='grid-template-columns'] > *:nth-child(3) { animation-delay: 180ms; }
+  .pis-revealed [style*='grid-template-columns'] > *:nth-child(4) { animation-delay: 250ms; }
+  .pis-revealed [style*='grid-template-columns'] > *:nth-child(5) { animation-delay: 320ms; }
+  .pis-revealed [style*='grid-template-columns'] > *:nth-child(6) { animation-delay: 390ms; }
+  .pis-revealed [style*='grid-template-columns'] > *:nth-child(7) { animation-delay: 460ms; }
+  .pis-revealed [style*='grid-template-columns'] > *:nth-child(n + 8) { animation-delay: 520ms; }
+
+  /* Hero visual — containers settle in, then one rises through. */
+  @keyframes pis-settle {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pis-traverse {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    65% {
+      opacity: 1;
+      transform: translateY(60px);
+    }
+    80% {
+      opacity: 1;
+      transform: translateY(60px);
+    }
+    95% {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+  }
+
+  .pis-box {
+    opacity: 0;
+    animation: pis-settle var(--duration-base) var(--ease-standard) forwards;
+  }
+
+  .pis-riser {
+    animation: pis-traverse 8s var(--ease-standard) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pis-box {
+      opacity: 1;
+      animation: none;
+    }
+    .pis-riser {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Page transition — a short fade on route change so navigation reads as
+     movement rather than a hard cut. */
+  @keyframes pis-page-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .pis-page {
+    animation: pis-page-in 380ms var(--ease-standard) both;
+  }
+
+  /* Underline that draws in from the left on hover. */
+  .pis-underline {
+    background-image: linear-gradient(var(--brand-accent), var(--brand-accent));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 2px;
+    transition: background-size 260ms var(--ease-standard);
+  }
+
+  .pis-underline:hover {
+    background-size: 100% 2px;
+  }
+}

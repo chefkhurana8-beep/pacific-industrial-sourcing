@@ -1,0 +1,179 @@
+{
+  "projectName": "Pacific Industrial Sourcing",
+  "description": "Global sourcing consultancy connecting NZ/AU businesses with verified industrial manufacturers across Asia",
+
+  "colors": {
+    "primary": {
+      "name": "Primary Brand Color - Slate Blue",
+      "hex": "#2E4756",
+      "darkHex": "#1B3540",
+      "lightHex": "#E4ECEF",
+      "description": "Core brand color - desaturated slate-blue carrying nearly all UI weight"
+    },
+    "secondary": {
+      "name": "Secondary Brand Color - Bronze/Copper",
+      "hex": "#A9723F",
+      "description": "Muted accent - reserved for single CTAs, eyebrows, and small emphasis marks"
+    },
+    "accent": {
+      "name": "Accent Color",
+      "hex": "#A9723F",
+      "description": "Emphasis color for highlights and interactive elements"
+    },
+    "neutral": {
+      "50": "#F7F8F9",
+      "100": "#EEF0F2",
+      "200": "#DDE1E5",
+      "300": "#C3CAD1",
+      "400": "#9AA3AC",
+      "500": "#7C8891",
+      "600": "#5B6570",
+      "700": "#3A434B",
+      "800": "#232B32",
+      "900": "#12171C"
+    },
+    "semantic": {
+      "success": "#3F7D58",
+      "success_bg": "#E7F1EA",
+      "warning": "#B98A2E",
+      "warning_bg": "#FBF1DF",
+      "error": "#B0453D",
+      "error_bg": "#F8E7E5",
+      "info": "#52717F",
+      "info_bg": "#F3F7F8"
+    },
+    "surfaces": {
+      "page": "#F7F8F9",
+      "card": "#FFFFFF",
+      "sunken": "#EEF0F2",
+      "inverse": "#1B3540"
+    }
+  },
+
+  "typography": {
+    "fontFamily": {
+      "display": {
+        "name": "Display Font (Headlines)",
+        "fontFamily": "'Libre Franklin', -apple-system, sans-serif",
+        "weights": ["500", "600", "700", "800"],
+        "description": "Used for h1, h2, h3 headings and hero sections - crisp corporate style"
+      },
+      "body": {
+        "name": "Body Font (Text)",
+        "fontFamily": "'Source Sans 3', -apple-system, sans-serif",
+        "weights": ["400", "500", "600", "700"],
+        "description": "Used for paragraphs, descriptions, and body text - professional services tone"
+      },
+      "mono": {
+        "name": "Monospace Font (Code)",
+        "fontFamily": "'Courier New', monospace",
+        "weights": ["400", "600"],
+        "description": "Used for code snippets and technical content"
+      }
+    },
+    "scale": {
+      "display": "3.5rem",
+      "h1": "2.5rem",
+      "h2": "2rem",
+      "h3": "1.5rem",
+      "h4": "1.25rem",
+      "body_lg": "1.125rem",
+      "body": "1rem",
+      "small": "0.875rem",
+      "caption": "0.75rem"
+    },
+    "lineHeight": {
+      "display": "1.08",
+      "h1": "1.15",
+      "h2": "1.2",
+      "h3": "1.3",
+      "h4": "1.4",
+      "body_lg": "1.6",
+      "body": "1.6",
+      "small": "1.5",
+      "caption": "1.4"
+    },
+    "tracking": {
+      "eyebrow": "0.08em",
+      "caps": "0.04em"
+    }
+  },
+
+  "businessVibe": {
+    "industry": "Industrial Manufacturing & Global Sourcing",
+    "tone": "Professional, Trustworthy, Consultative",
+    "audience": "B2B Clients, Manufacturing Companies, Procurement Partners",
+    "keywords": [
+      "Global Sourcing",
+      "Industrial Manufacturing",
+      "Procurement Consulting",
+      "Verified Suppliers",
+      "Supply Chain Excellence"
+    ],
+    "brandValues": [
+      "Reliability",
+      "Expertise",
+      "Transparency",
+      "Partnership",
+      "Quality Assurance"
+    ],
+    "voiceAndTone": {
+      "register": "Professional-services - measured, specific, trust-building through clarity rather than superlatives",
+      "casing": "Sentence case for body copy and buttons; headline eyebrows uppercase with letter-spacing",
+      "numbers": "Used sparingly and only when concrete - never invented statistics",
+      "emoji": "None - B2B industrial consultancy reads as more credible without them",
+      "examples": [
+        "We connect Australian and NZ businesses with verified manufacturers",
+        "Tell us what you need sourced",
+        "120+ Verified Suppliers"
+      ]
+    }
+  },
+
+  "spacing": {
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "24px",
+    "6": "32px",
+    "7": "48px",
+    "8": "64px",
+    "9": "96px",
+    "10": "128px",
+    "container_max": "1200px",
+    "container_pad": "24px"
+  },
+
+  "borderRadius": {
+    "sm": "4px",
+    "md": "8px",
+    "lg": "12px",
+    "pill": "999px"
+  },
+
+  "shadows": {
+    "sm": "0 1px 2px rgba(18,23,28,0.06)",
+    "md": "0 4px 16px rgba(18,23,28,0.08)",
+    "lg": "0 16px 40px rgba(18,23,28,0.12)"
+  },
+
+  "motion": {
+    "ease_standard": "cubic-bezier(.2,.6,.2,1)",
+    "duration_fast": "120ms",
+    "duration_base": "200ms"
+  },
+
+  "components": {
+    "availableComponents": [
+      "Button (primary, secondary, accent, ghost variants; sm, md, lg sizes)",
+      "Card (eyebrow, title, description, footer)",
+      "Input (text input with label, placeholder, error state)",
+      "Select (dropdown with label and options)",
+      "Checkbox (labeled checkbox)",
+      "Badge (tone variants: neutral, primary, accent, success, warning, error)",
+      "Tag (removable tag)"
+    ],
+    "intentionalDefaults": "No component library existed before this system - this is an intentional starting set sized to a services-marketing site with contact/quote forms. Expected to grow with Tabs, Accordion, Table if site expands."
+  }
+}

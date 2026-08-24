@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(gh repo *)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(python3:*)",
+      "mcp__plugin_episodic-memory_episodic-memory__search",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(mkdir -p .claude/skills/frontend-design)",
+      "Bash(cp skills/frontend-design/SKILL.md skills/frontend-design/LICENSE.txt .claude/skills/frontend-design/)",
+      "Bash(npm install *)",
+      "mcp__f801000a-9cf1-4227-8d10-48e11656ee84__read_file_content",
+      "Bash(dir /s)",
+      "PowerShell(head -50)",
+      "WebSearch",
+      "Bash(ls \"C:\\\\Users\\\\chefk\\\\Downloads\\\\pexels-griffinw-4940275\"* 2>/dev/null | head -1)",
+      "Bash(cp \"C:\\\\Users\\\\chefk\\\\Downloads/pexels-griffinw-4940275.jpg\" \"C:\\\\Users\\\\chefk\\\\Saurav Pacific Industrial Solution\\\\public\\\\services-bg.jpg\")",
+      "mcp__visualize__read_me"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
