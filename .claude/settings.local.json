@@ -24,7 +24,9 @@
       "Bash(git push *)",
       "Bash(git config *)",
       "Bash(rm -rf \"./claude-cookbooks/.git\" \"./skills/.git\")",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(npm run *)",
+      "Bash(rm -rf \"./plugins/superpowers-marketplace/.git\")"
     ],
     "deny": [],
     "ask": []
