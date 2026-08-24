@@ -18,7 +18,13 @@
       "WebSearch",
       "Bash(ls \"C:\\\\Users\\\\chefk\\\\Downloads\\\\pexels-griffinw-4940275\"* 2>/dev/null | head -1)",
       "Bash(cp \"C:\\\\Users\\\\chefk\\\\Downloads/pexels-griffinw-4940275.jpg\" \"C:\\\\Users\\\\chefk\\\\Saurav Pacific Industrial Solution\\\\public\\\\services-bg.jpg\")",
-      "mcp__visualize__read_me"
+      "mcp__visualize__read_me",
+      "Bash(git rm *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git config *)",
+      "Bash(rm -rf \"./claude-cookbooks/.git\" \"./skills/.git\")",
+      "Bash(git add *)"
     ],
     "deny": [],
     "ask": []
