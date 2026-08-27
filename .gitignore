@@ -1,3 +1,6 @@
 
 skills/
 claude-cookbooks/
+
+# Large video files
+public/*.mp4
