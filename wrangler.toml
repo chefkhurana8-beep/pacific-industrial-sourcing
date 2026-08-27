@@ -1,13 +1,7 @@
 name = "pacific-industrial-sourcing"
-type = "javascript"
-account_id = ""
-workers_dev = true
-route = ""
-zone_id = ""
+main = "worker.js"
 compatibility_date = "2026-08-26"
 
-[env.production]
-vars = { }
-
-[env.production.secrets]
-# RESEND_API_KEY will be set via Cloudflare Pages UI
+[assets]
+directory = "./dist"
+binding = "ASSETS"
