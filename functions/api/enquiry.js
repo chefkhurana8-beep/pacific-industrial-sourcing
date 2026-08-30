@@ -29,6 +29,50 @@ const TYPE_LABELS = {
   other: 'Other',
 }
 
+/**
+ * The logo mark, drawn with bordered table cells rather than an <img>.
+ *
+ * public/logo-mark.svg cannot be used directly: Gmail strips SVG entirely, and
+ * every major client hides remote images until the reader clicks "show images",
+ * so an <img> signature is blank on first read — exactly when it matters. The
+ * mark is three rectangles, so borders reproduce it faithfully and it always
+ * renders. Colours match the SVG: #2E4756 navy, #A9723F bronze.
+ */
+/*
+ * Geometry is scaled from the SVG, not eyeballed. In the 64-unit viewBox each
+ * rect is 22x16 with a centred 3-unit stroke, so its outer size is 25x19 and
+ * the boxes sit 1 unit apart — a 4% gap. At the ~0.9 scale used here that is
+ * 22x17 boxes with a 1px gap. Bigger gaps read as three loose squares rather
+ * than one mark.
+ */
+const box = (color) =>
+  `<div style="width:16px;height:11px;border:3px solid ${color};border-radius:2px;font-size:0;line-height:0;">&nbsp;</div>`
+
+const LOGO_MARK = `
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;line-height:0;">
+    <tr><td colspan="2" align="center" style="padding:0 0 1px 0;">${box('#A9723F')}</td></tr>
+    <tr>
+      <td style="padding:0 1px 0 0;">${box('#2E4756')}</td>
+      <td style="padding:0;">${box('#2E4756')}</td>
+    </tr>
+  </table>
+`
+
+const SIGNATURE = `
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:28px;border-collapse:collapse;">
+    <tr>
+      <td style="padding-right:14px;vertical-align:middle;">${LOGO_MARK}</td>
+      <td style="vertical-align:middle;font-family:sans-serif;">
+        <div style="font-size:15px;font-weight:700;color:#2E4756;letter-spacing:0.02em;">PACIFIC INDUSTRIAL</div>
+        <div style="font-size:13px;color:#5B6570;letter-spacing:0.16em;">SOURCING</div>
+        <div style="font-size:13px;margin-top:6px;">
+          <a href="mailto:${TO}" style="color:#3E5A6B;text-decoration:none;">${TO}</a>
+        </div>
+      </td>
+    </tr>
+  </table>
+`
+
 const escapeHtml = (s = '') =>
   String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
 
@@ -86,6 +130,7 @@ export async function onRequestPost({ request, env }) {
     </table>
     <h3 style="font-family:sans-serif;color:#2E4756;margin-top:24px;">Enquiry</h3>
     <p style="font-family:sans-serif;font-size:15px;line-height:1.6;white-space:pre-wrap;">${escapeHtml(message)}</p>
+    ${SIGNATURE}
   `
 
   const ackHtml = `
@@ -96,10 +141,7 @@ export async function onRequestPost({ request, env }) {
     </p>
     <p style="font-family:sans-serif;font-size:15px;line-height:1.6;color:#5B6570;">For your records, this is what you sent:</p>
     <blockquote style="font-family:sans-serif;font-size:15px;line-height:1.6;border-left:2px solid #A9723F;margin:0;padding-left:16px;color:#3A434B;white-space:pre-wrap;">${escapeHtml(message)}</blockquote>
-    <p style="font-family:sans-serif;font-size:15px;line-height:1.6;margin-top:24px;">
-      Pacific Industrial Sourcing<br>
-      <a href="mailto:${TO}" style="color:#3E5A6B;">${TO}</a>
-    </p>
+    ${SIGNATURE}
   `
 
   try {
