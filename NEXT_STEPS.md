@@ -1,105 +1,72 @@
-# Next session — pick up here
+# Status
 
-**Everything is done except one thing.** The contact form works end to end;
-the Resend API key is just saved under the wrong name.
+**The site is live and the contact form works end to end.** Verified 2026-08-29:
+a real enquiry submitted through `/api/enquiry` returned `{"ok":true}` and both
+emails — the enquiry and the acknowledgement — arrived in
+`info@pacificindustrialsourcing.co.nz`.
+
+| Component | Status |
+| --- | --- |
+| Site live on the custom domain | Working |
+| Code on GitHub, auto-deploys on push | Working |
+| Worker script deployed | Working |
+| `/api/enquiry` endpoint | Working |
+| Form validation (name, email, consent) | Working |
+| `RESEND_API_KEY` bound at runtime | Working |
+| Enquiry + acknowledgement emails | Working |
+
+Nothing is outstanding. The items below are optional.
 
 ---
 
-## The one job for tomorrow
+## How it is wired
 
-The key is currently stored as a secret named **`Secret`**. It needs to be
-named **`RESEND_API_KEY`**. The key value itself is correct and already
-verified — only the name is wrong.
+The site deploys to Cloudflare as a **Worker with static assets** — *not* as a
+Pages project, even though `functions/api/enquiry.js` is written in the Pages
+Functions style.
 
-### Step 1 — open the settings
+- `worker.js` is the entry point. It routes `POST /api/enquiry` to the existing
+  `onRequestPost` handler and serves everything else from `env.ASSETS`.
+- `wrangler.toml` declares the Worker and its assets directory.
+- The dashboard **Deploy command** must stay `npx wrangler deploy`. If it is set
+  to `npm run build`, the site rebuilds but nothing is ever deployed.
 
-Cloudflare dashboard → **Workers & Pages** → **pacific-industrial-sourcing**
-→ **Settings** → scroll to the top section, **Runtime variables and secrets**.
+### Three things that cost a day, worth not repeating
 
-> Careful: there is a *second* "Variables and secrets" section lower down
-> inside the **Builds** card. That one is the wrong one — it only applies
-> while the site is building, not while it is running.
+1. **A Pages `functions/` directory is invisible to a Worker deploy.** The form
+   had no backend at all until `worker.js` existed.
+2. **Cloudflare will not attach secrets to a Worker with no script.** Every
+   settings panel showed "cannot be added to a Worker that only has static
+   assets" until a real entry point was deployed.
+3. **Saving a secret creates a *version*, and a version is not live until it is
+   promoted.** The dashboard showed the key while the running Worker still used
+   an older version without it. Fixed under **Deployments → Version History →
+   ⋯ → Promote**, which is also where to look if a secret ever seems ignored.
 
-### Step 2 — delete the wrong entry
+### Adding or changing a secret later
 
-Find the entry named `Secret` and delete it. Cloudflare cannot rename a
-secret in place, so it has to be removed and re-added.
+Dashboard: **Settings → Runtime variables and secrets** (the section at the very
+top — the one inside the *Builds* card is build-time only and the Worker cannot
+read it). Add it, then check **Deployments** and promote the new version.
 
-### Step 3 — add it again, correctly
-
-| Field | What goes in it |
-| --- | --- |
-| Type | `Secret` — this is the **dropdown** |
-| Variable name | `RESEND_API_KEY` |
-| Value | the Resend key, starts with `re_` |
-
-**The mistake last time:** the word "Secret" was typed into the *Variable
-name* box. "Secret" is the type, not the name. The name box must contain
-`RESEND_API_KEY`.
-
-Save it.
-
-### Alternative — if the dashboard is being difficult
-
-From a terminal in the project folder:
+Or from the project folder, which does both in one step:
 
 ```bash
 npx wrangler secret put RESEND_API_KEY
 ```
 
-It logs in via the browser once, then prompts `Enter a secret value:` —
-paste the key there. This cannot get the name wrong.
-
 ---
 
-## Then tell Claude "done"
-
-Claude will:
-
-1. Send a real test enquiry and confirm both emails arrive
-2. Remove the temporary `/api/_diag` endpoint from `worker.js`
-3. Confirm the site is clean and finished
-
----
-
-## What was already fixed (no action needed)
-
-| Item | Status |
-| --- | --- |
-| Site live on the custom domain | Done |
-| Code on GitHub, auto-deploys on push | Done |
-| Worker script deployed | Done |
-| `/api/enquiry` endpoint reachable | Done |
-| Form validation (name, email, consent) | Done |
-| Cloudflare accepts runtime secrets | Done |
-| Resend key value is valid | Done |
-| **Key bound to the right name** | **← tomorrow** |
-
-### The problem that took the longest
-
-The project deploys as a **Worker**, not as Cloudflare **Pages**. Two effects:
-
-- `functions/api/enquiry.js` uses the Pages convention, so it was being
-  ignored completely — the form had no backend at all.
-- Cloudflare refuses to attach secrets to a Worker that has no script,
-  which is why every settings panel showed "cannot be added to a Worker
-  that only has static assets."
-
-Fixed by adding `worker.js` (routes `/api/enquiry` to the existing handler,
-serves everything else from static assets) and rewriting `wrangler.toml`.
-The dashboard **Deploy command** also had to become `npx wrangler deploy`.
-
----
-
-## Parked — not urgent
+## Optional, not urgent
 
 - **Background videos are missing in production.** `public/*.mp4` is in
-  `.gitignore`, so neither video ever reaches the build. `Hero.jsx` and
-  `About.jsx` both request them and get a 404. `hero-bg.mp4` is 7 MB and
-  could simply be committed; `about-bg.mp4` is 87 MB, over Cloudflare's
-  25 MB per-file limit, so it needs compressing or hosting on Stream/R2.
-- **`node_modules/` is committed to git** (~3,800 files). Harmless but
-  bloats every clone. Worth untracking sometime.
-- **Rotate the Resend key** at some point — it was pasted into a chat
-  window, so treat it as seen. Resend can issue a new one in a click; only
-  the Cloudflare secret would need updating.
+  `.gitignore`, so neither video reaches the build. `Hero.jsx` and `About.jsx`
+  request them and get a 404 — the sections fall back to their background
+  colours, which looks intentional rather than broken. `hero-bg.mp4` is 7 MB and
+  could simply be committed. `about-bg.mp4` is 87 MB, over Cloudflare's 25 MB
+  per-file limit, so it needs compressing or hosting on Stream/R2.
+- **`node_modules/` is committed to git** (~3,800 files). Harmless but bloats
+  every clone. Worth untracking.
+- **Rotate the Resend key** when convenient. It was pasted into a chat window
+  during setup, so treat it as seen. Resend issues a new one in a click; only
+  the Cloudflare secret would need updating afterwards.
