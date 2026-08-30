@@ -21,11 +21,6 @@ export default function Contact() {
             {SITE.email}
           </a>
 
-          <h3 style={{ ...asideHeading, marginTop: 'var(--space-6)' }}>Coverage</h3>
-          <p style={asideText}>
-            New Zealand and Australia, sourcing from verified manufacturers across Asia.
-          </p>
-
           <h3 style={{ ...asideHeading, marginTop: 'var(--space-6)' }}>What happens next</h3>
           <ol style={list}>
             <li style={listItem}>You send the enquiry.</li>
@@ -72,13 +67,6 @@ const link = {
   fontSize: 'var(--text-body)',
   color: 'var(--text-link)',
   wordBreak: 'break-word',
-}
-
-const asideText = {
-  fontSize: 'var(--text-small)',
-  lineHeight: 'var(--leading-body)',
-  color: 'var(--text-body)',
-  margin: 0,
 }
 
 const list = { margin: 0, paddingLeft: '1.1rem' }
