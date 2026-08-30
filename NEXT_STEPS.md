@@ -1,9 +1,38 @@
 # Status
 
-**The site is live and the contact form works end to end.** Verified 2026-08-29:
+**The site is live and the contact form works end to end.** Verified 2026-08-30:
 a real enquiry submitted through `/api/enquiry` returned `{"ok":true}` and both
 emails — the enquiry and the acknowledgement — arrived in
-`info@pacificindustrialsourcing.co.nz`.
+`info@pacificindustrialsourcing.co.nz`, carrying the branded logo signature.
+
+---
+
+## Next week — search visibility
+
+The agenda for the week of **2026-08-31** is getting the site found on Google.
+The full plan, in plain language, is published here:
+
+**https://claude.ai/code/artifact/d94ddf9a-c010-4d3f-8ad3-6c74abce4f89**
+
+Seven jobs in priority order:
+
+| # | Job | Who |
+| --- | --- | --- |
+| 1 | Claim the free Google Business Profile | **You** — needs a phone number first |
+| 2 | Remove the `#` from the web addresses | Claude |
+| 3 | Give every page its own title | Claude |
+| 4 | Tell Google what kind of business this is | Claude |
+| 5 | Add a sitemap | Claude |
+| 6 | Get listed on other websites | **You** |
+| 7 | Write pages answering real customer questions | Both |
+
+**Job 2 gates the rest.** The site uses hash routing (`/#/services`), so Google
+files all six pages as a single address and no inner page can rank on its own.
+Jobs 3–5 are wasted effort until that lands.
+
+Realistic target phrases are NZ-specific — "sourcing agent New Zealand",
+"industrial sourcing NZ" — not the bare word "sourcing", which competes
+globally with Alibaba and Thomasnet.
 
 | Component | Status |
 | --- | --- |
