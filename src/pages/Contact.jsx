@@ -20,6 +20,9 @@ export default function Contact() {
           <a href={`mailto:${SITE.email}`} style={link}>
             {SITE.email}
           </a>
+          <a href={`tel:${SITE.phoneLink}`} style={{ ...link, marginTop: 'var(--space-1)' }}>
+            {SITE.phone}
+          </a>
 
           <h3 style={{ ...asideHeading, marginTop: 'var(--space-6)' }}>What happens next</h3>
           <ol style={list}>
@@ -64,6 +67,7 @@ const asideHeading = {
 }
 
 const link = {
+  display: 'block',
   fontSize: 'var(--text-body)',
   color: 'var(--text-link)',
   wordBreak: 'break-word',

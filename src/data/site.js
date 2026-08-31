@@ -13,6 +13,9 @@ export const SITE = {
   shortName: 'Pacific Industrial',
   domain: 'pacificindustrialsourcing.co.nz',
   email: 'info@pacificindustrialsourcing.co.nz',
+  phone: '022 100 1959',
+  // E.164 for tel: links — NZ +64, leading 0 dropped.
+  phoneLink: '+64221001959',
   tagline: 'Industrial sourcing and procurement',
   description:
     'Sourcing consulting and procurement for New Zealand and Australian businesses working with verified industrial manufacturers across Asia.',
